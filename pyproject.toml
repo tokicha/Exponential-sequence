@@ -1,0 +1,23 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "exponential-sequence"
+version = "0.1.0"
+description = "A high-performance O(1) exponential sequence engine"
+readme = "README.md"
+authors = [
+    { name = "Mohammed Umer", email = "your_email@example.com" }
+]
+license = { text = "MIT" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+requires-python = ">=3.7"
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/tokicha/Exponential-sequence"
