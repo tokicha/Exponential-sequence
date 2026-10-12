@@ -1,0 +1,45 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    # 1. Test Rust Implementation
+    - name: Set up Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        profile: minimal
+        toolchain: stable
+        override: true
+
+    - name: Build and Test Rust
+      run: |
+        cargo build --release
+        cargo test --release
+
+    # 2. Build and Test C++ Implementation
+    - name: Configure CMake (C++)
+      run: cmake -B build -S .
+
+    - name: Build C++ Binaries & Server
+      run: cmake --build build --config Release
+
+    # 3. Test Python Implementation
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Run Python Script
+      run: |
+        python exponential_sequence.py
